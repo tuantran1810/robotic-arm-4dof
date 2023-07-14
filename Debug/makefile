@@ -70,6 +70,9 @@ robotic-arm-4dof.list \
 OBJCOPY_BIN += \
 robotic-arm-4dof.bin \
 
+flash: main-build
+	@echo 'flashing...'
+	st-flash write $(PWD)/robotic_arm_4dof.bin 0x08000000
 
 # All Target
 all: main-build
@@ -78,8 +81,8 @@ all: main-build
 main-build: robotic-arm-4dof.elf secondary-outputs
 
 # Tool invocations
-robotic-arm-4dof.elf robotic-arm-4dof.map: $(OBJS) $(USER_OBJS) /home/tuantran/sources/robotic-arm-4dof/STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "robotic-arm-4dof.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/tuantran/sources/robotic-arm-4dof/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="robotic-arm-4dof.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+robotic-arm-4dof.elf robotic-arm-4dof.map: $(OBJS) $(USER_OBJS) $(PWD)/../STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "robotic-arm-4dof.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"$(PWD)/../STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="robotic-arm-4dof.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
