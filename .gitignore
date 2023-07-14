@@ -25,8 +25,13 @@
 *.la
 *.a
 *.lib
+*.su
 
 # Executables
 *.exe
 *.out
 *.app
+*.bin
+*.elf
+*.list
+*.map
