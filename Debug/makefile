@@ -72,7 +72,7 @@ robotic-arm-4dof.bin \
 
 flash: main-build
 	@echo 'flashing...'
-	st-flash write $(PWD)/robotic_arm_4dof.bin 0x08000000
+	st-flash write $(PWD)/robotic-arm-4dof.bin 0x08000000
 
 # All Target
 all: main-build
